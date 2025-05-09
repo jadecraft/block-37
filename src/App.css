@@ -1,0 +1,21 @@
+h1 {
+  text-align: center;
+  text-decoration: underline;
+  background-color: rgb(171, 202, 219);
+  color: rgb(44, 26, 3);
+}
+
+#img {
+  height: 400px;
+  width: 400px;
+  
+}
+
+.cookie {
+  padding: 10px;
+  text-align: center;
+  border-style: double;
+  
+  
+}
+
