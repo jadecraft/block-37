@@ -10,9 +10,9 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path='/' element={<Cookies/>}/>
       <Route path='/register' element={<Register setToken={setToken} />}/>
       <Route path='/login' element={<Login />}/>
+      <Route path='/' element={<Cookies/>}/>
     </Routes>
       
       </>
