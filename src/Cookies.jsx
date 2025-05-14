@@ -43,7 +43,7 @@ function Cookies() {
         <h1 id="title">Whip'd Cookies!</h1>
         <div className="cookie-detail">
           <h2>{singleCookie.name}</h2>
-          <p>{singleCookie.price}</p>
+          <p>${singleCookie.price} per cookie.</p>
           <img id= "cookie-pics" src={singleCookie.img_url} alt={singleCookie.name} />
           <p>{singleCookie.description}</p>
           <button onClick={() => setSingleCookie(null)}>Back to list</button>
@@ -53,25 +53,25 @@ function Cookies() {
   }
 
   return (
-    <>
-      <h1 id="title">Whip'd Cookies!</h1>
-      <Navbar />
-      {cookies.length === 0 ? (
-        <div>No cookies available</div>
-      ) : (
-        cookies.map((cookie) => (
+  <>
+    <h1 id="title">Whip'd Cookies!</h1>
+    <Navbar />
+    {cookies.length === 0 ? (
+      <div>No cookies available</div>
+    ) : (
+      <div className="cookie-container">
+        {cookies.map((cookie) => (
           <div className="cookie" key={cookie.id}>
-            <h2>{cookie.name}</h2>
-            <p>{cookie.price}</p>
+            <h2>{cookie.name}:</h2>
             <img id="img" src={cookie.img_url} alt={cookie.name} />
             <button onClick={() => setSingleCookie(cookie)}>See Details</button>
           </div>
-        ))
-      )}
-    </>
-  );
+        ))}
+      </div>
+    )}
+  </>
+);
 }
-
 export default Cookies;
 
 

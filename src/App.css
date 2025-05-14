@@ -1,21 +1,76 @@
 h1 {
+  display: block;              
+  width: 100vw;                
+  margin: 0;                 
+  padding: 20px 0;             
   text-align: center;
   text-decoration: underline;
   background-color: rgb(171, 202, 219);
   color: rgb(44, 26, 3);
 }
 
-#img {
-  height: 400px;
-  width: 400px;
-  
-}
 
 .cookie {
-  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
   text-align: center;
-  border-style: double;
-  
-  
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
+.cookie:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cookie-container {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  margin-top: 10%;            
+}
+
+
+#img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px 0;
+  object-fit: cover;
+}
+
+button {
+  background-color: rgb(171, 202, 219);
+  color: rgb(44, 26, 3);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  float: right;
+  padding: 5%;
+  text-align: center;
+}
+
+a {
+  display: block;
+  padding: 15px;
+  background-color:  rgb(171, 202, 219);
+  border-radius: 6%;
+}
