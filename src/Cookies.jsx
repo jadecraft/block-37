@@ -41,6 +41,7 @@ function Cookies() {
     return (
       <>
         <h1 id="title">Whip'd Cookies!</h1>
+        <a href="/" className="home-link">Home</a>
         <div className="cookie-detail">
           <h2>{singleCookie.name}</h2>
           <p>${singleCookie.price} per cookie.</p>
