@@ -8,6 +8,12 @@ h1 {
   background-color: rgb(171, 202, 219);
   color: rgb(44, 26, 3);
 }
+ h2{                            
+  margin: 0;                             
+  text-align: center;
+  background-color: rgb(171, 202, 219);
+  color: rgb(44, 26, 3);
+ }
 
 
 .cookie {
@@ -61,25 +67,34 @@ button:hover {
 
 ul {
   list-style: none;
-  display: flex;             
-  justify-content: center;     
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
   margin: 0;
   background-color: rgb(171, 202, 219); 
 }
 
 li {
-  padding: 0 20px;              
+  margin: 0 12px;
 }
 
 a {
   display: block;
-  padding: 15px;
+  padding: 12px 24px;
   background-color: rgb(171, 202, 219);
-  border-radius: 6%;
+  border-radius: 12px;
   text-decoration: none;
-  color: rgb(44, 26, 3);       
+  color: rgb(44, 26, 3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
+
+a:hover {
+  background-color: #0056b3;
+  color: white;
+  transform: translateY(-3px);
+}
+
 
 .cookie-detail {
   max-width: 600px;
@@ -144,4 +159,55 @@ a {
 .home-link:hover {
   background-color: #0056b3;
   color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+input {
+  padding: 0.5rem;
+  background-color: rgb(171, 202, 219);
+  color:  rgb(44, 26, 3);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form.button {
+    padding: 0.5rem;
+    background-color: rgb(44, 26, 3);
+    color:rgb(171, 202, 219);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#Login-Title {
+  text-align: center;
+  margin-top: 10%;
+  text-decoration: underline;
+  font-size: 3rem;
+}
+
+#Register-Title {
+  text-align: center;
+  margin-top: 10%;
+  text-decoration: underline;
+  font-size: 3rem;
 }

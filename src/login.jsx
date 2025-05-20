@@ -36,7 +36,8 @@ const handleChange = (event) => {
 
     return (
         <div>
-            <h2>Login</h2>
+            <a href="/" className="home-link">Home</a>
+            <h2 id="Login-Title">Login</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Email:{" "}
@@ -54,7 +55,7 @@ const handleChange = (event) => {
                     onChange={handleChange}
                     />
                 </label>
-                <input type="submit" />
+                <button type="submit">Login</button>
             </form>
         </div>
 

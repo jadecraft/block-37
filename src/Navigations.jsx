@@ -1,4 +1,3 @@
-import './Cookies';
 import {NavLink} from "react-router-dom";
 
 function Navbar () {
@@ -14,6 +13,9 @@ function Navbar () {
             </li>
             <li>
                 <NavLink to= "/register">Register</NavLink>
+            </li>
+            <li>
+                <NavLink to="/cart">Cart</NavLink>
             </li>
         </ul>
         
