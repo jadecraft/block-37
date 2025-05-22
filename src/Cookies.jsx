@@ -1,4 +1,4 @@
-// Cookies.js
+
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -6,7 +6,7 @@ function Cookies({ addToCart }) {
   const [cookies, setCookies] = useState([]);
   const [error, setError] = useState(null);
   const [singleCookie, setSingleCookie] = useState(null);
-
+//fetching the cookies data
   useEffect(() => {
     async function getCookies() {
       try {
@@ -26,7 +26,7 @@ function Cookies({ addToCart }) {
   if (error) {
     return <div>Error: {error}</div>;
   }
-
+//returning the data for the description 
   if (singleCookie) {
     return (
       <>
@@ -42,7 +42,7 @@ function Cookies({ addToCart }) {
       </>
     );
   }
-
+//retunring the data for the cookies to be shown on the home page
   return (
     <>
       <h1 id="title">Whip'd Cookies!</h1>

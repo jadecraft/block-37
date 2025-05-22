@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+//enables a logged in user to view the products they add to the cart
+
 function Cart({ cart, removeFromCart, handleCheckout, total, token, setCart }) {
   useEffect(() => {
     if (!token) {
@@ -12,6 +14,7 @@ function Cart({ cart, removeFromCart, handleCheckout, total, token, setCart }) {
 
   const totalAmount = typeof total === 'number' ? total : 0;
 
+  //login users can see the quanatity of cookies they have added to the cart and remove cookies from cart
   return (
     <div>
       <h1>Your Cart 🛒</h1>
