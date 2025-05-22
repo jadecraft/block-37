@@ -7,12 +7,24 @@ h1 {
   text-decoration: underline;
   background-color: rgb(171, 202, 219);
   color: rgb(44, 26, 3);
+  
 }
- h2{                            
+
+h2 {
+ display: block;              
+  width: 100vw;                
   margin: 0;                             
   text-align: center;
   background-color: rgb(171, 202, 219);
   color: rgb(44, 26, 3);
+}
+
+ h3{                            
+  margin: 0;                             
+  text-align: center;
+  background-color: rgb(171, 202, 219);
+  color: rgb(44, 26, 3);
+  border-radius: 12px;
  }
 
 
@@ -26,7 +38,6 @@ h1 {
   max-width: 300px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
 }
 
 .cookie:hover {
@@ -87,6 +98,7 @@ a {
   color: rgb(44, 26, 3);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease, transform 0.2s ease;
+  font-weight: bolder;
 }
 
 a:hover {
@@ -172,6 +184,7 @@ form {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
+  margin-top: 5%;
 }
 
 label {
@@ -200,14 +213,12 @@ form.button {
 
 #Login-Title {
   text-align: center;
-  margin-top: 10%;
   text-decoration: underline;
   font-size: 3rem;
 }
 
 #Register-Title {
   text-align: center;
-  margin-top: 10%;
   text-decoration: underline;
   font-size: 3rem;
 }

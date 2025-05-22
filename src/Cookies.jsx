@@ -1,7 +1,6 @@
 // Cookies.js
 import { useState, useEffect } from 'react';
 import './App.css';
-import Navbar from './Navigations';
 
 function Cookies({ addToCart }) {
   const [cookies, setCookies] = useState([]);
@@ -32,9 +31,9 @@ function Cookies({ addToCart }) {
     return (
       <>
         <h1 id="title">Whip'd Cookies!</h1>
-        <a href="/" className="home-link">Home</a>
+        <h2 id='by'>By Jade Craft</h2>
         <div className="cookie-detail">
-          <h2>{singleCookie.name}</h2>
+          <h3>{singleCookie.name}</h3>
           <p>${singleCookie.price} per cookie.</p>
           <img id="cookie-pics" src={singleCookie.img_url} alt={singleCookie.name} />
           <p>{singleCookie.description}</p>
@@ -48,14 +47,13 @@ function Cookies({ addToCart }) {
     <>
       <h1 id="title">Whip'd Cookies!</h1>
       <h2>By Jade Craft</h2>
-      <Navbar></Navbar>
       {cookies.length === 0 ? (
         <div>No cookies available</div>
       ) : (
         <div className="cookie-container">
           {cookies.map((cookie) => (
             <div className="cookie" key={cookie.id}>
-              <h2>{cookie.name}:</h2>
+              <h3>{cookie.name}:</h3>
               <img id="img" src={cookie.img_url} alt={cookie.name} />
               <button onClick={() => setSingleCookie(cookie)}>See Details</button>
               <button onClick={() => addToCart(cookie)}>Add to Cart</button>

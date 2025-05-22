@@ -27,12 +27,28 @@ function App() {
     setCart(cart.filter((item) => item.id !== id));
   };
 
+  const handleCheckout = () => {
+  if (!token) {
+    alert('Please log in to check out.');
+    return;
+  }
+  alert('Thank you for your purchase!');
+  setCart([]);
+};
+
+ const total = () => {
+  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+};
+
+
+
+
   return (
     <>
       <Navbar />
       <Routes>
         <Route path='/' element={<Cookies addToCart={addToCart} />} />
-        <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
+      <Route path='/cart' element={<Cart cart={cart} removeFromCart={removeFromCart} handleCheckout={handleCheckout} total={total}/>} />
         <Route path='/register' element={<Register setToken={setToken} />} />
         <Route path='/login' element={<Login />} />
       </Routes>

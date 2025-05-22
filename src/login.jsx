@@ -36,7 +36,6 @@ const handleChange = (event) => {
 
     return (
         <div>
-            <a href="/" className="home-link">Home</a>
             <h2 id="Login-Title">Login</h2>
             <form onSubmit={handleSubmit}>
                 <label>

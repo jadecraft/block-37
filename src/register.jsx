@@ -6,16 +6,20 @@ function Register ({setToken}) {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [name, setName] = useState("")
-const nagivate = useNavigate();
+const [username, setUsername] = useState("")
+const navigate = useNavigate();
 
 const handleChange = (event) => {
+    const {name, value} = event.target;
     
-    if (event.target.name === "email") {
-      setEmail(event.target.value);
+    if (name === "email") {
+      setEmail(value);
     } else if (name === "password") {
-      setPassword(event.target.value);
+      setPassword(value);
     } else if (name === "name") {
-        setName(event.target.value);
+        setName(value);
+    } else if (name === "username") {
+        setUsername(value);
     }
 
   };
@@ -24,14 +28,14 @@ const handleChange = (event) => {
     event.preventDefault();
 
     try{const response = await fetch(
-        "", {method:"POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        "/api/auth/register", {method:"POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, username, password }),
       }
       );
       const json = await response.json();
       console.log(json)
       setToken(json.token);
-      nagivate('/')
+      navigate('/')
     
     } catch(err){
         console.log(err)
@@ -40,12 +44,12 @@ const handleChange = (event) => {
 
     return (
         <div>
-            <a href="/" className="home-link">Home</a>
             <h2 id="Register-Title">Register</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:{""}
                     <input
+                    name="name"
                     value={name}
                     onChange={handleChange}
                     />
@@ -55,6 +59,14 @@ const handleChange = (event) => {
                     <input
                     value={email}
                     name="email"
+                    onChange={handleChange}
+                    />
+                </label>
+                <label>
+                    Username:{""}
+                    <input
+                    value={username}
+                    name="username"
                     onChange={handleChange}
                     />
                 </label>

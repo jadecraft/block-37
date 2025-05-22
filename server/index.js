@@ -122,6 +122,19 @@ app.use(cors())
     console.log(err);
     res.status(err.status || 500).send({ error: err.message || err });
   });
+
+  app.post("/api/auth/register", async (req, res, next) => {
+    try {
+      const { username, password, name, mailing_address} = req.body;
+    
+    const user = await createUser({ username, password, name, mailing_address });
+    const token = await authenticate({ username, password });
+    console.log("created user", user);
+    res.send({ token, user });
+  } catch (err) {
+    next(err);
+    }
+  })
   
   const init = async () => {
     console.log("connecting to database");
@@ -156,7 +169,7 @@ app.use(cors())
   
     console.log("data seeded");
   
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 3001;
     app.listen(port, () => console.log(`listening on port ${port}`));
   };
   init();
