@@ -17,7 +17,7 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors({
-  origin: "https://sparkly-maamoul-842dc9.netlify.app/", 
+  origin: "https://whipd-cookies.netlify.app/", 
   credentials: true
 }));
 
