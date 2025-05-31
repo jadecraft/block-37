@@ -1,19 +1,32 @@
 const pg = require("pg");
-const client = new pg.Client(
-  process.env.DATABASE_URL || {host: "localhost", database: "e_commerce_database", port: 5432, ssl: false, user: "postgres"}
-);
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 const JWT = process.env.JWT || "shhh";
 
+// Updated connection setup
+const connectionString =
+  process.env.DATABASE_URL || "postgres://postgres:@localhost:5432/e_commerce_database";
 
+const client = new pg.Client({
+  connectionString,
+  ssl:
+    process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging"
+      ? { rejectUnauthorized: false }
+      : undefined,
+});
+
+// ---------------------------
+// Database Functions
+// ---------------------------
 
 const createTables = async () => {
   const SQL = `
     DROP TABLE IF EXISTS user_products;
     DROP TABLE IF EXISTS users;
     DROP TABLE IF EXISTS products;
+
     CREATE TABLE users(
       id UUID PRIMARY KEY,
       username VARCHAR(255) NOT NULL UNIQUE,
@@ -25,21 +38,23 @@ const createTables = async () => {
       phone_number VARCHAR(255),
       billing_address VARCHAR(255)
     );
-       CREATE TABLE products(
-    id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NOT NULL,
-    img_url VARCHAR(255) NOT NULL,
-    price FLOAT NOT NULL
+
+    CREATE TABLE products(
+      id UUID PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      description VARCHAR(255) NOT NULL,
+      img_url VARCHAR(255) NOT NULL,
+      price FLOAT NOT NULL
     );
+
     CREATE TABLE user_products(
-     id UUID PRIMARY KEY,
-     user_id UUID NOT NULL,
-     product_id UUID NOT NULL,
-     quantity INTEGER NOT NULL,
-     UNIQUE (user_id, product_id),
-    FOREIGN KEY (user_id) REFERENCES Users(id),
-    FOREIGN KEY (product_id) REFERENCES Products(id)
+      id UUID PRIMARY KEY,
+      user_id UUID NOT NULL,
+      product_id UUID NOT NULL,
+      quantity INTEGER NOT NULL,
+      UNIQUE (user_id, product_id),
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (product_id) REFERENCES products(id)
     );
   `;
   await client.query(SQL);
@@ -47,7 +62,8 @@ const createTables = async () => {
 
 const createUser = async ({ username, password, name, mailing_address }) => {
   const SQL = `
-    INSERT INTO users(id, username, password, name, mailing_address) VALUES($1, $2, $3, $4, $5) RETURNING *
+    INSERT INTO users(id, username, password, name, mailing_address) 
+    VALUES($1, $2, $3, $4, $5) RETURNING *
   `;
   const response = await client.query(SQL, [
     uuid.v4(),
@@ -61,9 +77,9 @@ const createUser = async ({ username, password, name, mailing_address }) => {
 
 const createProducts = async ({ name, description, img_url, price }) => {
   const SQL = `
-    INSERT INTO products(id, name, description, img_url, price) VALUES ($1, $2, $3, $4, $5) RETURNING * 
+    INSERT INTO products(id, name, description, img_url, price) 
+    VALUES ($1, $2, $3, $4, $5) RETURNING * 
   `;
-
   const response = await client.query(SQL, [uuid.v4(), name, description, img_url, price]);
   return response.rows[0];
 };
@@ -74,7 +90,6 @@ const authenticate = async ({ username, password }) => {
     FROM users
     WHERE username = $1
   `;
-
   const response = await client.query(SQL, [username]);
   if (
     !response.rows.length ||
@@ -85,13 +100,13 @@ const authenticate = async ({ username, password }) => {
     throw error;
   }
   const token = await jwt.sign({ id: response.rows[0].id }, JWT);
-
   return { token };
 };
 
 const createUserProduct = async ({ user_id, product_id, quantity }) => {
   const SQL = `
-    INSERT INTO user_products(id, user_id, product_id, quantity) VALUES ($1, $2, $3, $4) RETURNING * 
+    INSERT INTO user_products(id, user_id, product_id, quantity) 
+    VALUES ($1, $2, $3, $4) RETURNING * 
   `;
   const response = await client.query(SQL, [uuid.v4(), user_id, product_id, quantity]);
   return response.rows[0];
@@ -141,7 +156,6 @@ const findUserByToken = async (token) => {
     WHERE id = $1
   `;
   const { id } = await jwt.verify(token, JWT);
-
   const response = await client.query(SQL, [id]);
   if (!response.rows.length) {
     const error = Error("not authorized");
@@ -150,6 +164,10 @@ const findUserByToken = async (token) => {
   }
   return response.rows[0];
 };
+
+// ---------------------------
+// Exported Interface
+// ---------------------------
 
 module.exports = {
   client,
