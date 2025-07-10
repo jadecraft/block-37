@@ -10,7 +10,7 @@ function Cookies({ addToCart }) {
   useEffect(() => {
     async function getCookies() {
       try {
-        const response = await fetch('https://whipd-cookies.onrender.com/api/cookies');
+        const response = await fetch('/api/cookies');
         if (!response.ok) throw new Error('Network response was not ok');
         const json = await response.json();
         if (json) setCookies(json);
